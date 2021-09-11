@@ -22,7 +22,7 @@ def load_start():
     user to make a selection in order to continue.
     """
 
-    print("Welcome, please make a choice from the options below.")
+    print("\nWelcome, please make a choice from the options below.\n")
     print("Type 1, 2 or 3 and press enter to make the selection.\n")
     print("1: View all listings")
     print("2: Add a listing")
@@ -38,14 +38,14 @@ def validate_selection():
     user_choice = int(input("Make a selection between 1 and 3: "))
     if user_choice == 1:
         display_listings()
-    elif user_choice == 2:
-        add_listings()
-    elif user_choice == 3:
-        add_listings()
+    # elif user_choice == 2:
+    #     add_listings()
+    # elif user_choice == 3:
+    #     add_listings()
     else:
         print("That is not a valid selection,")
         print("please enter a selection between 1 and 3.")
-        validate_selection()
+        # validate_selection()
 
 
 def display_listings():
@@ -55,10 +55,13 @@ def display_listings():
     the selection "1" from the main menu.
     """
 
+    rows_data = []
     display_listings = rentals.get_all_values()
-    print(display_listings)
-    load_start()
-    validate_selection()
+    for rows_data in range(1, 11):
+        row = rentals.row_values(rows_data)
+        print(row)
+    # load_start()
+    # validate_selection()
 
 
 def add_listings():
@@ -86,42 +89,47 @@ def add_listings():
         print("That is a valid entry, thank you")
         add_location()
 
-def add_location():
-        
-    location = input("Please enter the location: ")
-    if len(location) != [8, 10, 12]:
-        print("That is not a valid input, please try again.")
-        print("Example: AUCKLAND, WELLINGTON or CHRISTCHURCH")
-        add_location()
-    else:
-        print("That is a valid entry, thank you")
-        add_bedrooms()
+    def add_location():
+            
+        input_location = input("Please enter the location: ")
+        location = ["Auckland", "Wellington", "Christchurch"]
+        if input_location in location:
+            print("That is a valid entry, thank you")
+            add_bedrooms()
+        else:
+            print("That is not a valid input, please try again.")
+            print("Example: Auckland, Wellington or Christchurch")
+            add_location()
+            return(input_location)
 
-def add_bedrooms():
-        
-    bedrooms = input("Please enter the amount of bedrooms: ")
-    if bedrooms != [1, 2, 3, 4, 5]:
-        print("That is not a valid input, please try again.")
-        print("Example: 1, 2, 3, 4 or 5")
-        add_bedrooms()
-    else:
-        print("That is a valid entry, thank you")
-        add_parking()
+    def add_bedrooms():
+            
+        input_bedrooms = input("Please enter the amount of bedrooms: ")
+        bedrooms = ["1", "2", "3", "4", "5"]
+        if input_bedrooms in bedrooms:
+            print("That is a valid entry, thank you")
+            add_parking()
+        else:
+            print("That is not a valid input, please try again.")
+            print("Example: 1, 2, 3, 4 or 5")
+            add_bedrooms()
 
-def add_parking():
-        
-    parking = input("Please enter if parking is available: ")
-    if parking != int("Yes", "No"):
-        print("That is not a valid input, please try again.")
-        print("Example: Yes or No")
-        add_parking()
-    else:
-        print("That is a valid entry, thank you")
-        add_type()
+    def add_parking():
+            
+        input_parking = input("Please enter if parking is available: ")
+        parking = ["Yes", "No"]
+        if input_parking in parking:
+            print("That is a valid entry, thank you")
+            add_type()
+        else:
+            print("That is not a valid input, please try again.")
+            print("Example: Yes or No")
+            add_parking()
 
     # def add_cost():
-        
-    #     cost = input("Please enter the cost: ")
+            
+    #     input_cost = input("Please enter the cost: ")
+    #     cost = 
     #     if len(location) != [8, 10, 12]:
     #         print("That is not a valid input, please try again.")
     #         print("Example: AUCKLAND")
@@ -129,19 +137,18 @@ def add_parking():
     #     else:
     #         print("That is a valid entry, thank you")
 
-def add_type():
-        
-    type = input("Please enter the type of rental: ")
-    if type != int("House", "Apartment", "Studio"):
-        print("That is not a valid input, please try again.")
-        print("Example: House, Apartment or Studio")
-        add_type()
-    else:
-        print("That is a valid entry, thank you")
-        load_start()
-        validate_selection()
-
-
+    def add_type():
+            
+        input_type = input("Please enter the type of rental: ")
+        type = ["House", "Apartment", "Studio"]
+        if input_type in type:
+            print("That is a valid entry, thank you")
+            load_start()
+            validate_selection()
+        else:
+            print("That is not a valid input, please try again.")
+            print("Example: House, Apartment or Studio")
+            add_type()
 
 
 def delete_listings():
@@ -169,6 +176,11 @@ def delete_listings():
         print("That is a valid entry, thank you")
         load_start()
         validate_selection()
+
+
+"""
+This code runs all the functions in the program.
+"""
 
 load_start()
 validate_selection()
