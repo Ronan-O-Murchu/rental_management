@@ -57,10 +57,12 @@ def display_listings():
 
     display_listings = rentals.get_all_values()
     print(display_listings)
+    load_start()
+    validate_selection()
 
 
 def add_listings():
-
+    
     """
     This code will allow the user to add a listing to the list.
     """
@@ -74,15 +76,18 @@ def add_listings():
     before submission.
     4. The user will need to confirm the info to add to the database.
     """
-
-    print("Please make sure info is correct")
-    ref = int(input("Please enter the reference number: "))
-    if len(ref) != 8:
+    
+    print("Please make sure the info is correct\n")
+    
+    ref_num = input("Please enter the reference number: ")
+    if len(ref_num) != 8:
         print("That is not a valid input, please try again.")
         print("Example: AKL-1234")
+        add_listings()
     else:
         print("That is a valid entry, thank you")
-
+        load_start()
+        validate_selection()
 
 load_start()
 validate_selection()
