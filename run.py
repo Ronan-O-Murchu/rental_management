@@ -23,7 +23,7 @@ def load_start():
     """
 
     print("Welcome, please make a choice from the options below.")
-    print("Input 1, 2 or 3 and select enter to make a selection.\n")
+    print("Type 1, 2 or 3 and press enter to make the selection.\n")
     print("1: View all listings")
     print("2: Add a listing")
     print("3: Delete a listing\n")
@@ -75,6 +75,87 @@ def add_listings():
     3. The data will all need to be stored and displayed together
     before submission.
     4. The user will need to confirm the info to add to the database.
+    """
+
+    reference = input("Please enter the reference number: ")
+    if len(reference) != 8:
+        print("That is not a valid input, please try again.")
+        print("Example: AKL-1234")
+        add_listings()
+    else:
+        print("That is a valid entry, thank you")
+        add_location()
+
+def add_location():
+        
+    location = input("Please enter the location: ")
+    if len(location) != [8, 10, 12]:
+        print("That is not a valid input, please try again.")
+        print("Example: AUCKLAND, WELLINGTON or CHRISTCHURCH")
+        add_location()
+    else:
+        print("That is a valid entry, thank you")
+        add_bedrooms()
+
+def add_bedrooms():
+        
+    bedrooms = input("Please enter the amount of bedrooms: ")
+    if bedrooms != [1, 2, 3, 4, 5]:
+        print("That is not a valid input, please try again.")
+        print("Example: 1, 2, 3, 4 or 5")
+        add_bedrooms()
+    else:
+        print("That is a valid entry, thank you")
+        add_parking()
+
+def add_parking():
+        
+    parking = input("Please enter if parking is available: ")
+    if parking != int("Yes", "No"):
+        print("That is not a valid input, please try again.")
+        print("Example: Yes or No")
+        add_parking()
+    else:
+        print("That is a valid entry, thank you")
+        add_type()
+
+    # def add_cost():
+        
+    #     cost = input("Please enter the cost: ")
+    #     if len(location) != [8, 10, 12]:
+    #         print("That is not a valid input, please try again.")
+    #         print("Example: AUCKLAND")
+    #         add_type()
+    #     else:
+    #         print("That is a valid entry, thank you")
+
+def add_type():
+        
+    type = input("Please enter the type of rental: ")
+    if type != int("House", "Apartment", "Studio"):
+        print("That is not a valid input, please try again.")
+        print("Example: House, Apartment or Studio")
+        add_type()
+    else:
+        print("That is a valid entry, thank you")
+        load_start()
+        validate_selection()
+
+
+
+
+def delete_listings():
+    
+    """
+    This code will allow the user to delete a listing from the existing list.
+    """
+
+    """
+    Plan here is to create code to load the info from the
+    top row and allow the user to delete data.
+    1. The user will need to see the full row of data for each listing.
+    2. The user will need to be able to select the row of data to delete.
+    3. The user will need to confirm to delete the selected data.
     """
     
     print("Please make sure the info is correct\n")
