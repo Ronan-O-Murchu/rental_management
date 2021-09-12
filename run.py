@@ -38,17 +38,16 @@ def validate_selection():
     user_choice = int(input("Make a selection between 1 and 3: "))
     if user_choice == 1:
         display_listings()
-    # elif user_choice == 2:
-    #     add_listings()
-    # elif user_choice == 3:
-    #     add_listings()
+    elif user_choice == 2:
+        display_latest_listings()
+    elif user_choice == 3:
+        delete_listings()
     else:
         print("That is not a valid selection,")
         print("please enter a selection between 1 and 3.")
-        # validate_selection()
 
 
-def display_listings():
+def display_latest_listings():
 
     """
     This code will display the listings when the user makes
@@ -56,18 +55,19 @@ def display_listings():
     """
 
     rows_data = []
-    display_listings = rentals.get_all_values()
+    show_listings = rentals.get_all_values()
     for rows_data in range(1, 11):
         row = rentals.row_values(rows_data)
-        print(row)
-    # load_start()
-    # validate_selection()
+        print(*row)
+    load_start()
+    validate_selection()
 
 
 def add_listings():
-    
+
     """
-    This code will allow the user to add a listing to the list.
+    This code will allow the user to add a listing to the list
+    when the user selects "2" from the main menu.
     """
 
     """
@@ -80,81 +80,90 @@ def add_listings():
     4. The user will need to confirm the info to add to the database.
     """
 
-    reference = input("Please enter the reference number: ")
-    if len(reference) != 8:
+    user_reference = []
+    input_reference = input("Please enter the reference number: ")
+    if len(input_reference) != 8:
         print("That is not a valid input, please try again.")
-        print("Example: AKL-1234")
+        print("Example: AKL-1234\n")
         add_listings()
     else:
-        print("That is a valid entry, thank you")
+        print("That is a valid entry, thank you\n")
         add_location()
 
-    def add_location():
-            
-        input_location = input("Please enter the location: ")
-        location = ["Auckland", "Wellington", "Christchurch"]
-        if input_location in location:
-            print("That is a valid entry, thank you")
-            add_bedrooms()
-        else:
-            print("That is not a valid input, please try again.")
-            print("Example: Auckland, Wellington or Christchurch")
-            add_location()
-            return(input_location)
+    return user_reference
 
-    def add_bedrooms():
-            
-        input_bedrooms = input("Please enter the amount of bedrooms: ")
-        bedrooms = ["1", "2", "3", "4", "5"]
-        if input_bedrooms in bedrooms:
-            print("That is a valid entry, thank you")
-            add_parking()
-        else:
-            print("That is not a valid input, please try again.")
-            print("Example: 1, 2, 3, 4 or 5")
-            add_bedrooms()
 
-    def add_parking():
-            
-        input_parking = input("Please enter if parking is available: ")
-        parking = ["Yes", "No"]
-        if input_parking in parking:
-            print("That is a valid entry, thank you")
-            add_type()
-        else:
-            print("That is not a valid input, please try again.")
-            print("Example: Yes or No")
-            add_parking()
+def add_location():
 
-    # def add_cost():
-            
-    #     input_cost = input("Please enter the cost: ")
-    #     cost = 
-    #     if len(location) != [8, 10, 12]:
-    #         print("That is not a valid input, please try again.")
-    #         print("Example: AUCKLAND")
-    #         add_type()
-    #     else:
-    #         print("That is a valid entry, thank you")
+    input_location = input("Please enter the location: ")
+    location = ["Auckland", "Wellington", "Christchurch"]
+    if input_location in location:
+        print("That is a valid entry, thank you\n")
+        add_bedrooms()
+    else:
+        print("That is not a valid entry, try again")
+        print("Please enter Auckland, Wellington or Christchurh\n")
+        add_location()
 
-    def add_type():
-            
-        input_type = input("Please enter the type of rental: ")
-        type = ["House", "Apartment", "Studio"]
-        if input_type in type:
-            print("That is a valid entry, thank you")
-            load_start()
-            validate_selection()
-        else:
-            print("That is not a valid input, please try again.")
-            print("Example: House, Apartment or Studio")
-            add_type()
 
+def add_bedrooms():
+
+    input_bedrooms = input("Please enter the amount of bedrooms: ")
+    bedrooms = ["1", "2", "3", "4", "5"]
+
+    if input_bedrooms in bedrooms:
+        print("That is a valid entry, thank you\n")
+        add_parking()
+    else:
+        print("That is not a valid input, please try again.")
+        print("Example: 1, 2, 3, 4 or 5\n")
+        add_bedrooms()
+
+
+def add_parking():
+
+    input_parking = input("Please enter if parking is available: ")
+    parking = ["Yes", "No"]
+
+    if input_parking in parking:
+        print("That is a valid entry, thank you\n")
+        add_type()
+    else:
+        print("That is not a valid input, please try again.")
+        print("Example: Yes or No\n")
+        add_parking()
+
+
+# def add_cost():
+
+#     cost = input("Please enter the cost: ")
+#     if len(location) != [8, 10, 12]:
+#         print("That is not a valid input, please try again.")
+#         print("Example: AUCKLAND")
+#         add_type()
+#     else:
+#         print("That is a valid entry, thank you")
+
+
+def add_type():
+
+    input_type = input("Please enter the type of rental: ")
+    type = ["House", "Apartment", "Studio"]
+
+    if input_type in type:
+        print("That is a valid entry, thank you\n")
+    else:
+        print("That is not a valid input, please try again.")
+        print("Example: House, Apartment or Studio\n")
+        add_type()
+
+    # print(f"\nYou entered: {user_reference}\n")
 
 def delete_listings():
-    
+
     """
-    This code will allow the user to delete a listing from the existing list.
+    This code will allow the user to delete a listing from the existing list
+    when the user selects "3" from the main menu.
     """
 
     """
@@ -164,18 +173,26 @@ def delete_listings():
     2. The user will need to be able to select the row of data to delete.
     3. The user will need to confirm to delete the selected data.
     """
-    
+
     print("Please make sure the info is correct\n")
-    
+
     ref_num = input("Please enter the reference number: ")
     if len(ref_num) != 8:
         print("That is not a valid input, please try again.")
         print("Example: AKL-1234")
-        add_listings()
+        delete_listings()
     else:
-        print("That is a valid entry, thank you")
-        load_start()
-        validate_selection()
+        print("Are you sure you want to delete this entry")
+        print(*{ref_num})
+        confirm_delete = input("Are you sure you want to delete: ")
+        confirm = ["Yes"]
+
+        if confirm_delete in confirm:
+            print("That entry has now been deleted\n")
+        else:
+            print("That is not a valid input, please try again.")
+            print("Example: Yes or No\n")
+            delete_listings()
 
 
 """
