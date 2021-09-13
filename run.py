@@ -82,7 +82,8 @@ def add_reference():
 
     user_reference = []
     global input_reference
-    input_reference = input("Please enter the reference number: ")
+    input_reference = input("\nPlease enter the reference number: ")
+
     if len(input_reference) != 8:
         print("That is not a valid input, please try again.")
         print("Example: AKL-1234\n")
@@ -98,6 +99,7 @@ def add_location():
     global input_location
     input_location = input("Please enter the location: ")
     location = ["Auckland", "Wellington", "Christchurch"]
+
     if input_location in location:
         print("That is a valid entry, thank you\n")
         add_bedrooms()
@@ -164,15 +166,30 @@ def add_type():
 
     if input_type in type:
         print("That is a valid entry, thank you\n")
+        add_listings()
     else:
         print("That is not a valid input, please try again.")
         print("Example: House, Apartment or Studio\n")
         add_type()
 
-    print("You entered: " +  "REF:" + (input_reference) + ", " +  "LOCATION:" + (input_location) + ", " +  "BEDROOMS:" + (input_bedrooms) + ", " +  "PARKING:" + (input_parking) + ", " + "COST:$" + (input_cost) + ", " +  "TYPE:" + (input_type))
+def add_listings():
+    print("You entered: " +  "REF: "[(input_reference) + ", " +  "LOCATION: " + (input_location) + ", " +  "BEDROOMS: " + (input_bedrooms) + ", " +  "PARKING: " + (input_parking) + ", " + "COST: $" + (input_cost) + ", " +  "TYPE: " + (input_type)])
+    
+    confirm = []
     global user_selections
-    user_selections = input_reference, input_location, input_bedrooms, input_parking, input_cost, input_type
-    # print(user_selections)
+    user_selections = input("Do you want to update the database with this new data: ")
+    user_confirmation = ["Yes", "No"]
+
+    if user_selections == ["Yes"]:
+        print("The listing is being updated . . .\n")
+        print("Success!")
+    elif user_selections == ["No"]:
+        print("The listing is has not been updated\n")
+        print("Returning to main menu . . .")
+    else:
+        print("That is not a valid input, please try again.")
+        print("Example: Yes or No\n")
+        add_listings()
 
 
 
@@ -194,6 +211,7 @@ def delete_listings():
     print("Please make sure the info is correct\n")
 
     ref_num = input("Please enter the reference number: ")
+
     if len(ref_num) != 8:
         print("That is not a valid input, please try again.")
         print("Example: AKL-1234")
@@ -203,6 +221,7 @@ def delete_listings():
         print(*{ref_num})
         confirm_delete = input("Are you sure you want to delete: ")
         confirm = ["Yes"]
+
         if confirm_delete in confirm:
             print("That entry has now been deleted\n")
         else:
