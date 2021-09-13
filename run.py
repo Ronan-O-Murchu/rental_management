@@ -81,6 +81,7 @@ def add_reference():
     """
 
     user_reference = []
+    global input_reference
     input_reference = input("Please enter the reference number: ")
     if len(input_reference) != 8:
         print("That is not a valid input, please try again.")
@@ -88,85 +89,91 @@ def add_reference():
         add_reference()
     else:
         print("That is a valid entry, thank you\n")
-        # add_location()
-    
-    return input_reference
-
-    print("You entered: " + str(input_reference))
-
-# def add_location():
-
-#     input_location = input("Please enter the location: ")
-#     location = ["Auckland", "Wellington", "Christchurch"]
-#     if input_location in location:
-#         print("That is a valid entry, thank you\n")
-#         add_bedrooms()
-#     else:
-#         print("That is not a valid entry, try again")
-#         print("Please enter Auckland, Wellington or Christchurh\n")
-#         add_location()
-
-#     return input_location
+        add_location()
 
 
-# def add_bedrooms():
+def add_location():
 
-#     input_bedrooms = input("Please enter the amount of bedrooms: ")
-#     bedrooms = ["1", "2", "3", "4", "5"]
-
-#     if input_bedrooms in bedrooms:
-#         print("That is a valid entry, thank you\n")
-#         add_parking()
-#     else:
-#         print("That is not a valid input, please try again.")
-#         print("Example: 1, 2, 3, 4 or 5\n")
-#         add_bedrooms()
-
-#     return input_bedrooms
-
-
-# def add_parking():
-
-#     input_parking = input("Please enter if parking is available: ")
-#     parking = ["Yes", "No"]
-
-#     if input_parking in parking:
-#         print("That is a valid entry, thank you\n")
-#         add_type()
-#     else:
-#         print("That is not a valid input, please try again.")
-#         print("Example: Yes or No\n")
-#         add_parking()
-
-#     return input_parking
+    user_location = []
+    global input_location
+    input_location = input("Please enter the location: ")
+    location = ["Auckland", "Wellington", "Christchurch"]
+    if input_location in location:
+        print("That is a valid entry, thank you\n")
+        add_bedrooms()
+    else:
+        print("That is not a valid entry, try again")
+        print("Please enter Auckland, Wellington or Christchurh\n")
+        add_location()
 
 
-# def add_cost():
+def add_bedrooms():
 
-#     cost = input("Please enter the cost: ")
-#     if len(location) != [8, 10, 12]:
-#         print("That is not a valid input, please try again.")
-#         print("Example: AUCKLAND")
-#         add_type()
-#     else:
-#         print("That is a valid entry, thank you")
+    user_bedrooms = []
+    global input_bedrooms
+    input_bedrooms = input("Please enter the amount of bedrooms: ")
+    bedrooms = ["1", "2", "3", "4", "5"]
+
+    if input_bedrooms in bedrooms:
+        print("That is a valid entry, thank you\n")
+        add_parking()
+    else:
+        print("That is not a valid input, please try again.")
+        print("Example: 1, 2, 3, 4 or 5\n")
+        add_bedrooms()
 
 
-# def add_type():
+def add_parking():
 
-#     input_type = input("Please enter the type of rental: ")
-#     type = ["House", "Apartment", "Studio"]
+    user_parking = []
+    global input_parking
+    input_parking = input("Please enter if parking is available: ")
+    parking = ["Yes", "No"]
 
-#     if input_type in type:
-#         print("That is a valid entry, thank you\n")
-#     else:
-#         print("That is not a valid input, please try again.")
-#         print("Example: House, Apartment or Studio\n")
-#         add_type()
+    if input_parking in parking:
+        print("That is a valid entry, thank you\n")
+        add_cost()
+    else:
+        print("That is not a valid input, please try again.")
+        print("Example: Yes or No\n")
+        add_parking()
 
-#     return input_type
 
-    print("You entered: " + str(input_reference))
+def add_cost():
+
+    user_cost = []
+    global input_cost
+    input_cost = input("Please enter the cost: ")
+    price = ["300", "350", "400", "450", "500", "550", "600"]
+
+    if input_cost in price:
+        print("That is a valid entry, thank you\n")
+        add_type()
+    else:
+        print("That is not a valid input, please try again.")
+        print("Prices are in between $300 - $600\n")
+        add_cost()
+
+
+def add_type():
+
+    user_type = []
+    global input_type
+    input_type = input("Please enter the type of rental: ")
+    type = ["House", "Apartment", "Studio"]
+
+    if input_type in type:
+        print("That is a valid entry, thank you\n")
+    else:
+        print("That is not a valid input, please try again.")
+        print("Example: House, Apartment or Studio\n")
+        add_type()
+
+    print("You entered: " +  "REF:" + (input_reference) + ", " +  "LOCATION:" + (input_location) + ", " +  "BEDROOMS:" + (input_bedrooms) + ", " +  "PARKING:" + (input_parking) + ", " + "COST:$" + (input_cost) + ", " +  "TYPE:" + (input_type))
+    global user_selections
+    user_selections = input_reference, input_location, input_bedrooms, input_parking, input_cost, input_type
+    # print(user_selections)
+
 
 
 def delete_listings():
