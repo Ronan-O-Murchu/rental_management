@@ -37,9 +37,9 @@ def validate_selection():
 
     user_choice = int(input("Make a selection between 1 and 3: "))
     if user_choice == 1:
-        display_listings()
-    elif user_choice == 2:
         display_latest_listings()
+    elif user_choice == 2:
+        all_functions()
     elif user_choice == 3:
         delete_listings()
     else:
@@ -63,7 +63,7 @@ def display_latest_listings():
     validate_selection()
 
 
-def add_listings():
+def add_reference():
 
     """
     This code will allow the user to add a listing to the list
@@ -80,23 +80,22 @@ def add_listings():
     4. The user will need to confirm the info to add to the database.
     """
 
-    user_reference = []
     input_reference = input("Please enter the reference number: ")
+    
     if len(input_reference) != 8:
         print("That is not a valid input, please try again.")
         print("Example: AKL-1234\n")
-        add_listings()
+        add_reference()
     else:
         print("That is a valid entry, thank you\n")
-        add_location()
-
-    return user_reference
+    return input_reference
 
 
 def add_location():
 
     input_location = input("Please enter the location: ")
     location = ["Auckland", "Wellington", "Christchurch"]
+    
     if input_location in location:
         print("That is a valid entry, thank you\n")
         add_bedrooms()
@@ -104,6 +103,7 @@ def add_location():
         print("That is not a valid entry, try again")
         print("Please enter Auckland, Wellington or Christchurh\n")
         add_location()
+    return input_location
 
 
 def add_bedrooms():
@@ -119,6 +119,8 @@ def add_bedrooms():
         print("Example: 1, 2, 3, 4 or 5\n")
         add_bedrooms()
 
+    # return input_bedrooms
+
 
 def add_parking():
 
@@ -127,11 +129,13 @@ def add_parking():
 
     if input_parking in parking:
         print("That is a valid entry, thank you\n")
-        add_type()
+        # add_type()
     else:
         print("That is not a valid input, please try again.")
         print("Example: Yes or No\n")
         add_parking()
+
+    # return input_parking
 
 
 # def add_cost():
@@ -157,42 +161,57 @@ def add_type():
         print("Example: House, Apartment or Studio\n")
         add_type()
 
-    # print(f"\nYou entered: {user_reference}\n")
+    # return input_type
+
+def all_functions():
+    add_reference()
+    add_location()
+    # add_bedrooms()
+    # add_parking()
+    # add_type()
+    print("The code got this far, yay!")
+    
+"""
+I want to be able to print this:
+You entered: {input_reference}, {input_location}, {input_bedrooms}, {input_parking}, {input_type}
+"""
+
+    
+
 
 def delete_listings():
 
-    """
-    This code will allow the user to delete a listing from the existing list
-    when the user selects "3" from the main menu.
-    """
+    # """
+    # This code will allow the user to delete a listing from the existing list
+    # when the user selects "3" from the main menu.
+    # """
 
-    """
-    Plan here is to create code to load the info from the
-    top row and allow the user to delete data.
-    1. The user will need to see the full row of data for each listing.
-    2. The user will need to be able to select the row of data to delete.
-    3. The user will need to confirm to delete the selected data.
-    """
+    # """
+    # Plan here is to create code to load the info from the
+    # top row and allow the user to delete data.
+    # 1. The user will need to see the full row of data for each listing.
+    # 2. The user will need to be able to select the row of data to delete.
+    # 3. The user will need to confirm to delete the selected data.
+    # """
 
-    print("Please make sure the info is correct\n")
+    # print("Please make sure the info is correct\n")
 
-    ref_num = input("Please enter the reference number: ")
-    if len(ref_num) != 8:
-        print("That is not a valid input, please try again.")
-        print("Example: AKL-1234")
-        delete_listings()
-    else:
-        print("Are you sure you want to delete this entry")
-        print(*{ref_num})
-        confirm_delete = input("Are you sure you want to delete: ")
-        confirm = ["Yes"]
-
-        if confirm_delete in confirm:
-            print("That entry has now been deleted\n")
-        else:
-            print("That is not a valid input, please try again.")
-            print("Example: Yes or No\n")
-            delete_listings()
+    # ref_num = input("Please enter the reference number: ")
+    # if len(ref_num) != 8:
+    #     print("That is not a valid input, please try again.")
+    #     print("Example: AKL-1234")
+    #     delete_listings()
+    # else:
+    #     print("Are you sure you want to delete this entry")
+    #     print(*{ref_num})
+    #     confirm_delete = input("Are you sure you want to delete: ")
+    #     confirm = ["Yes"]
+    #     if confirm_delete in confirm:
+    #         print("That entry has now been deleted\n")
+    #     else:
+    #         print("That is not a valid input, please try again.")
+    #         print("Example: Yes or No\n")
+    #         delete_listings()
 
 
 """
