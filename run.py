@@ -1,3 +1,8 @@
+    """
+    This code was referenced from the CI "Love Sandwiches" project
+    for the import and scope syntax.
+    """
+
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -26,7 +31,7 @@ def load_start():
     print("Auckland, Wellington and Christchurch regions.")
 
 
-def validate_selection():
+def make_selection():
 
     """
     This code validates the users selection on the main menu
@@ -44,10 +49,10 @@ def validate_selection():
     elif user_choice == 2:
         add_reference()
     elif user_choice == 3:
+        display_delete_list()
         delete_listings()
     else:
         print("\nThat is not a valid selection,")
-        print("please enter a selection between 1 and 3.")
 
 
 def display_latest_listings():
@@ -56,14 +61,33 @@ def display_latest_listings():
     This code will display the 10 most recent listings when the user makes
     the selection "1" from the main menu.
     """
-
+    i = 0
     rows_data = []
     global show_listings
     show_listings = rentals.get_all_values()
-    for rows_data in range(2, 11):
+    for rows_data in range(len(show_listings), 1, -1):
+        i += 1
         row = rentals.row_values(rows_data)
+        row.insert(0, i)
         print(*row)
-    validate_selection()
+    make_selection()
+
+
+def display_delete_list():
+
+    """
+    This code will display the 10 most recent listings when the user makes
+    the selection "1" from the main menu.
+    """
+    i = 0
+    rows_data = []
+    global show_listings
+    show_listings = rentals.get_all_values()
+    for rows_data in range(len(show_listings), 1, -1):
+        i += 1
+        row = rentals.row_values(rows_data)
+        row.insert(0, i)
+        print(*row)
 
 
 def add_reference():
@@ -88,7 +112,6 @@ def add_reference():
 
     if len(input_reference) != 3:
         print("\nThat is not a valid input, please try again.")
-        print("Example: 123, ABC, A01\n")
         add_reference()
     else:
         print("That is a valid entry, thank you\n")
@@ -105,16 +128,32 @@ def add_location():
     print("Auckland, Wellington or Christchurch\n")
     user_location = []
     global input_location
-    input_location = input("Enter the data here:\n")
+    input_location = makeCap(input("Enter the data here:\n"))
     location = ["Auckland", "Wellington", "Christchurch"]
 
     if check_value(input_location, location):
         print("That is a valid entry, thank you\n")
         add_bedrooms()
     else:
-        print("\nThat is not a valid input, please try again.")
-        print("Please enter Auckland, Wellington or Christchurh\n")
+        print("\nThat is not a valid input, please try again.\n")
         add_location()
+
+
+def makeCap(the_word):
+
+    """
+    This function used in conjuction with the add_data functions
+    above makes the users inputs the correct format to update the database.
+    It will capitalise the first letter of each string input regardless which
+    way the user types the selections.
+    """
+
+
+
+    cap_the_word = the_word.capitalize()
+
+    print(cap_the_word)
+    return cap_the_word
 
 
 def add_bedrooms():
@@ -134,8 +173,7 @@ def add_bedrooms():
         print("That is a valid entry, thank you\n")
         add_parking()
     else:
-        print("\nThat is not a valid input, please try again.")
-        print("Example: 1, 2, 3, 4 or 5\n")
+        print("\nThat is not a valid input, please try again.\n")
         add_bedrooms()
 
 
@@ -156,8 +194,7 @@ def add_parking():
         print("That is a valid entry, thank you\n")
         add_cost()
     else:
-        print("\nThat is not a valid input, please try again.")
-        print("Example: Yes or No\n")
+        print("\nThat is not a valid input, please try again.\n")
         add_parking()
 
 
@@ -168,6 +205,7 @@ def add_cost():
     """
 
     print("Please enter the rental price for the property.\n")
+    print("Prices are in between $300 - $1000\n")
     user_cost = []
     global input_cost
     input_cost = int(input("Enter the data here:\n"))
@@ -176,8 +214,7 @@ def add_cost():
         print("That is a valid entry, thank you\n")
         add_type()
     else:
-        print("\nThat is not a valid input, please try again.")
-        print("Prices are in between $300 - $1000\n")
+        print("\nThat is not a valid input, please try again.\n")
         add_cost()
 
 
@@ -198,8 +235,7 @@ def add_type():
         print("That is a valid entry, thank you\n")
         add_availability()
     else:
-        print("\nThat is not a valid input, please try again.")
-        print("Example: House, Apartment or Studio\n")
+        print("\nThat is not a valid input, please try again.\n")
         add_type()
 
 
@@ -221,21 +257,8 @@ def add_availability():
         print("That is a valid entry, thank you\n")
         add_listings()
     else:
-        print("\nThat is not a valid input, please try again.")
-        print("Example: Please type Available or Occupied and press enter\n")
+        print("\nThat is not a valid input, please try again.\n")
         add_availability()
-
-
-def makeCap(the_word):
-
-    """
-    This function used in conjuction with the add_data functions
-    above makes the users inputs the correct format to update the database.
-    It will capitalise the first letter of each string input regardless which
-    way the user types the selections.
-    """
-
-    return the_word
 
 
 def check_value(the_value, the_array):
@@ -271,11 +294,11 @@ def add_listings():
         rentals.append_row(user_input)
         print("- - - Success! - - -\n")
         print("Returning to main menu . . .")
-        validate_selection()
+        make_selection()
     elif user_selections == ("No"):
         print("\nThe listing is has not been updated\n")
         print("Returning to main menu . . .")
-        validate_selection()
+        make_selection()
     else:
         print("\nThat is not a valid input, please try again.")
         print("Example: Yes or No\n")
@@ -289,28 +312,32 @@ def delete_listings():
     when the user selects "3" from the main menu.
     """
 
-    print("Please enter the 3 character reference code for the property to delete.")
-    print("Example: 123, ABC, A01 and then press enter\n")
+
+    print("\nPlease enter the row number you wish to delete.\n")
     print("Please make sure the info is correct\n")
 
     ref_num = input("Enter the data here: ")
-
-    if len(ref_num) != 3:
-        rentals.pop_row(ref_num)
+    cell_data_list = rentals.findall(ref_num)
+    # print(cell_data_list)
+    if check_value(ref_num, cell_data_list):
         print("\nThat is not a valid input, please try again.")
-        print("Example: 123, ABC, A01")
-        delete_listings()
+        print("Example: 123, ABC or J3M\n")
+        print("code made it this far 1")
+        # delete_listings()
     else:
         print(*{ref_num})
         confirm_delete = input("Are you sure you want to delete this data:\n")
         confirm = ["Yes"]
+        print("code made it this far 2")
 
-        if check_value(confirm_delete, confirm):
+        if makeCap(confirm_delete) == "Yes":
+            print("code made it this far 3")
+            rentals.delete_rows(cell_data_list)
             print("That entry has now been deleted\n")
+            
         else:
-            print("\nThat is not a valid input, please try again.")
-            print("Example: Yes or No\n")
-            delete_listings()
+            print("\nThat is not a valid input, please try again.\n")
+            # delete_listings()
 
 
 def main():
@@ -320,8 +347,8 @@ def main():
     """
 
     load_start()
-    validate_selection()
+    make_selection()
 
-main()
+# main()
 
-# add_type()
+delete_listings()
