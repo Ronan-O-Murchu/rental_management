@@ -1,7 +1,7 @@
-    """
-    This code was referenced from the CI "Love Sandwiches" project
-    for the import and scope syntax.
-    """
+"""
+This code was referenced from the CI "Love Sandwiches" project
+for the import and scope syntax.
+"""
 
 import gspread
 from google.oauth2.service_account import Credentials
@@ -45,7 +45,7 @@ def make_selection():
 
     user_choice = int(input("Make a selection between 1 and 3:\n"))
     if user_choice == 1:
-        display_latest_listings()
+        display_listings()
     elif user_choice == 2:
         add_reference()
     elif user_choice == 3:
@@ -55,10 +55,10 @@ def make_selection():
         print("\nThat is not a valid selection,")
 
 
-def display_latest_listings():
+def display_listings():
 
     """
-    This code will display the 10 most recent listings when the user makes
+    This code will display the listings when the user makes
     the selection "1" from the main menu.
     """
     i = 0
@@ -71,23 +71,6 @@ def display_latest_listings():
         row.insert(0, i)
         print(*row)
     make_selection()
-
-
-def display_delete_list():
-
-    """
-    This code will display the 10 most recent listings when the user makes
-    the selection "1" from the main menu.
-    """
-    i = 0
-    rows_data = []
-    global show_listings
-    show_listings = rentals.get_all_values()
-    for rows_data in range(len(show_listings), 1, -1):
-        i += 1
-        row = rentals.row_values(rows_data)
-        row.insert(0, i)
-        print(*row)
 
 
 def add_reference():
@@ -325,7 +308,7 @@ def delete_listings():
         print("code made it this far 1")
         # delete_listings()
     else:
-        print(*{ref_num})
+        print(cell_data_list)
         confirm_delete = input("Are you sure you want to delete this data:\n")
         confirm = ["Yes"]
         print("code made it this far 2")
