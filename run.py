@@ -65,12 +65,15 @@ def display_listings():
     rows_data = []
     global show_listings
     show_listings = rentals.get_all_values()
-    for rows_data in range(len(show_listings), 1, -1):
-        i += 1
+    for rows_data in reversed(range(len(show_listings), 0, -1)):
+        i - 1
         row = rentals.row_values(rows_data)
         row.insert(0, i)
         print(*row)
     make_selection()
+
+
+
 
 
 def add_reference():
@@ -288,6 +291,23 @@ def add_listings():
         add_listings()
 
 
+def display_delete_list():
+
+    """
+    This code will display the listings when the user makes
+    the selection "1" from the main menu.
+    """
+    i = 0
+    rows_data = []
+    global show_listings
+    show_listings = rentals.get_all_values()
+    for rows_data in reversed(range(len(show_listings), 0, -1)):
+        i += 1
+        row = rentals.row_values(rows_data)
+        row.insert(0, i)
+        print(row)
+
+
 def delete_listings():
 
     """
@@ -299,27 +319,36 @@ def delete_listings():
     print("\nPlease enter the row number you wish to delete.\n")
     print("Please make sure the info is correct\n")
 
-    ref_num = input("Enter the data here: ")
+    ref_num = input("Enter the data here:\n")
     cell_data_list = rentals.findall(ref_num)
     # print(cell_data_list)
-    if check_value(ref_num, cell_data_list):
-        print("\nThat is not a valid input, please try again.")
-        print("Example: 123, ABC or J3M\n")
-        print("code made it this far 1")
-        # delete_listings()
-    else:
-        print(cell_data_list)
-        confirm_delete = input("Are you sure you want to delete this data:\n")
-        confirm = ["Yes"]
-        print("code made it this far 2")
 
-        if makeCap(confirm_delete) == "Yes":
-            print("code made it this far 3")
-            rentals.delete_rows(cell_data_list)
-            print("That entry has now been deleted\n")
+    
+
+    if check_value(ref_num, cell_data_list):
+        print("This is the selection")
+        rentals.delete_rows(int(ref_num))
+    else:
+        
+
+    # if check_value(ref_num, cell_data_list):
+    #     print("\nThat is not a valid input, please try again.")
+    #     print("Example: 123, ABC or J3M\n")
+    #     print("code made it this far 1")
+        # delete_listings()
+    # else:
+    #     print(cell_data_list)
+    #     confirm_delete = input("Are you sure you want to delete this data:\n")
+    #     confirm = ["Yes"]
+    #     print("code made it this far 2")
+
+    #     if makeCap(confirm_delete) == "Yes":
+    #         print("code made it this far 3")
+    #         rentals.delete_rows(ref_num)
+    #         print("That entry has now been deleted\n")
             
-        else:
-            print("\nThat is not a valid input, please try again.\n")
+    #     else:
+    #         print("\nThat is not a valid input, please try again.\n")
             # delete_listings()
 
 
@@ -334,4 +363,4 @@ def main():
 
 # main()
 
-delete_listings()
+make_selection()
