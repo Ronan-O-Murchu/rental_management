@@ -88,7 +88,7 @@ def display_delete_list():
         i += 1
         row = rentals.row_values(rows_data)
         row.insert(0, i)
-        print(row)
+        print(*row)
 
 
 def check_value(the_value, the_array):
@@ -322,10 +322,13 @@ def delete_listings():
         print("That entry has now been deleted\n")
         rentals.delete_rows(int(ref_num))
         make_selection()
-    else:
+    elif confirm_delete == ("No"):
         print("\nThat entry has not been deleted\n")
         print("Returning to main menu . . . \n")
         make_selection()
+    else:
+        print("\nThat is not a valid input, please try again.")
+        delete_listings()
 
 
 def main():
