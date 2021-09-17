@@ -153,7 +153,7 @@ def add_location():
 
     print("Please enter the lcoation of the property.")
     print("Listings are only located in")
-    print("Auckland, Wellington or Christchurch.\n"")
+    print("Auckland, Wellington or Christchurch.\n")
     user_location = []
     global input_location
     input_location = makeCap(input("Enter the data here:\n"))
