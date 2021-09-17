@@ -152,7 +152,8 @@ def add_location():
     """
 
     print("Please enter the lcoation of the property.")
-    print("Listings are only located in Auckland, Wellington or Christchurch.\n")
+    print("Listings are only located in")
+    print("Auckland, Wellington or Christchurch.\n"")
     user_location = []
     global input_location
     input_location = makeCap(input("Enter the data here:\n"))
@@ -278,12 +279,18 @@ def add_listings():
     above checks if the values entered are valid.
     """
 
-    print("You entered: " + str(input_reference) + ", " + str(input_location) + ", " + str(input_bedrooms) + ", " + str(input_parking) + ", " + str(input_cost) + ", " + str(input_type) + ", " + str(input_availability))
-    user_input = [input_reference, input_location, str(input_bedrooms), input_parking, str(input_cost), input_type, input_availability]
+    print("You entered: " + str(input_reference) + ", " +
+          str(input_location) + ", " + str(input_bedrooms) + ", " +
+          str(input_parking) + ", " + str(input_cost) + ", " +
+          str(input_type) + ", " + str(input_availability))
+    user_input = [input_reference, input_location,
+                  str(input_bedrooms), input_parking,
+                  str(input_cost), input_type, input_availability]
 
     confirm = []
     global user_selections
-    user_selections = makeCap(input("\nDo you want to update the database with this new data:\n"))
+    user_selections = makeCap(input("\nDo you want to update the"
+                              "database with this new data:\n"))
     user_confirmation = ["Yes", "No"]
 
     if user_selections == ("Yes"):
@@ -315,7 +322,8 @@ def delete_listings():
     ref_num = input("Enter the data here:\n")
     cell_data_list = rentals.findall(ref_num)
     print("You have selected: " + str(rentals.row_values(ref_num)) + "\n")
-    confirm_delete = makeCap(input("Are you sure you want to delete this listing?:\n"))
+    confirm_delete = makeCap(input("Are you sure you want"
+                             "to delete this listing?:\n"))
     user_confirmation = ["Yes", "No"]
 
     if confirm_delete == ("Yes"):
