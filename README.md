@@ -78,7 +78,7 @@ The site was deployed to GitHub pages. The steps to deploy are as follows:
   - Within the source section I selected the Master Branch from the dop down menu.
   - This then provided me the link. 
 
-Github Link: 
+Github Link: https://ronan-o-murchu.github.io/rental_management/
 Heroku Link: https://rental-manage.herokuapp.com/
 
 # Credits and Acknowledgements
